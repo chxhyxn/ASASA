@@ -10,9 +10,22 @@
 		B9200A112D9E675200154EFE /* ASASA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ASASA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		B9200A872D9E779900154EFE /* Exceptions for "ASASA" folder in "ASASA" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = B9200A102D9E675200154EFE /* ASASA */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		B9200A132D9E675200154EFE /* ASASA */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				B9200A872D9E779900154EFE /* Exceptions for "ASASA" folder in "ASASA" target */,
+			);
 			path = ASASA;
 			sourceTree = "<group>";
 		};
@@ -256,6 +269,7 @@
 				DEVELOPMENT_TEAM = TXFPK3WSCH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ASASA/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "아사사";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
@@ -289,6 +303,7 @@
 				DEVELOPMENT_TEAM = TXFPK3WSCH;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = ASASA/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "아사사";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.photography";
 				INFOPLIST_KEY_NSCameraUsageDescription = "";
