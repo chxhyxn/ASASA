@@ -65,7 +65,7 @@ struct CameraView: View {
         }
         completion: {
             showContents = false
-            withAnimation {
+            withAnimation(.easeOut(duration: 0.8)) {
                 viewHeight = 0
             } completion: {
                 isShowing = false

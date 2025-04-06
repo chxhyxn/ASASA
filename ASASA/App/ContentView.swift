@@ -131,7 +131,7 @@ struct ContentView: View {
     
     private func openCameraView() {
         showCamera = true
-        withAnimation {
+        withAnimation(.easeIn(duration: 0.8)) {
             cameraViewHeight = .infinity
         } completion: {
             showCameraViewContents = true
