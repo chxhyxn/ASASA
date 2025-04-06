@@ -36,31 +36,51 @@ struct ContentView: View {
             VStack(spacing: 0) {
                 Spacer()
                 if showMoreSheet {
-                    // 실제 시트(메뉴) 부분
-                    VStack(spacing: 20) {
-                        Text("More Options")
-                            .font(.title2)
-                            .padding()
-                        
-                        Button("Settings") {
-                            // Do something
+                    VStack {
+                        Button(action: {
+                            viewModel.currentScreen = .profile
                             showMoreSheet = false
+                        }) {
+                            HStack {
+                                Image(systemName: "person.fill")
+                                    .foregroundColor(.blue)
+                                    .frame(width: 30)
+                                Text("프로필")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                                    .font(.caption)
+                            }
+                            .padding(.vertical, 14)
                         }
                         
-                        Button("Help") {
-                            // Do something
+                        Divider()
+                        Button(action: {
                             showMoreSheet = false
-                        }
-                        
-                        Button("Close") {
-                            showMoreSheet = false
+                        }) {
+                            HStack {
+                                Image(systemName: "person.fill")
+                                    .foregroundColor(.blue)
+                                    .frame(width: 30)
+                                Text("흠 머하지")
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Image(systemName: "chevron.right")
+                                    .foregroundColor(.gray)
+                                    .font(.caption)
+                            }
+                            .padding(.vertical, 14)
                         }
                     }
                     .frame(maxWidth: .infinity) // 너비를 최대로 설정
-                    .background(.white)
                     .transition(.move(edge: .bottom))
+                    .background(.white)
                 }
                 
+                // 회색 구분선
+                Divider()
+
                 // Bottom tab bar
                 HStack {
                     Spacer()
@@ -69,43 +89,43 @@ struct ContentView: View {
                     }) {
                         Image(systemName: viewModel.currentScreen == .learn ?
                               "book.circle.fill" :
-                              "book.circle")
+                                "book.circle")
                         .font(.largeTitle)
                     }
-
+                    
                     Spacer()
-
+                    
                     Button(action: {
                         viewModel.currentScreen = .feed
                     }) {
                         Image(systemName: viewModel.currentScreen == .feed ?
                               "magnifyingglass.circle.fill" :
-                              "magnifyingglass.circle")
+                                "magnifyingglass.circle")
                         .font(.largeTitle)
                     }
-
+                    
                     Spacer()
-
+                    
                     Button(action: {
                         openCameraView()
                     }) {
                         Image(systemName: "camera.circle")
-                        .font(.largeTitle)
+                            .font(.largeTitle)
                     }
-
+                    
                     Spacer()
-
+                    
                     Button(action: {
                         viewModel.currentScreen = .photos
                     }) {
                         Image(systemName: viewModel.currentScreen == .photos ?
                               "photo.circle.fill" :
-                              "photo.circle")
+                                "photo.circle")
                         .font(.largeTitle)
                     }
-
+                    
                     Spacer()
-
+                    
                     Button(action: {
                         showMoreSheet.toggle()
                     }) {
@@ -116,7 +136,7 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(Color(.systemGray6))
+                .background(.white)
             }
             
             // Camera View
@@ -126,7 +146,7 @@ struct ContentView: View {
                            showContents: $showCameraViewContents,
                            contentsOpacity: $cameraViewContentsOpacity
                 )
-                    .frame(width: .infinity, height: cameraViewHeight)
+                .frame(width: .infinity, height: cameraViewHeight)
             }
         }
         .animation(.easeInOut, value: showMoreSheet)
