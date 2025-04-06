@@ -4,6 +4,9 @@ struct ContentView: View {
     @State private var viewModel = ContentViewModel(currentScreen: .learn)
     @State private var showCamera = false
     @State private var showMoreSheet = false
+    @State private var cameraViewHeight: CGFloat = 0
+    @State private var showCameraViewContents = false
+    @State private var cameraViewContentsOpacity: Double = 0
     
     var body: some View {
         ZStack {
@@ -48,9 +51,7 @@ struct ContentView: View {
                     Spacer()
 
                     Button(action: {
-                        withAnimation(.spring()) {
-                            showCamera = true
-                        }
+                        openCameraView()
                     }) {
                         Image(systemName: "camera.circle")
                         .font(.largeTitle)
@@ -84,11 +85,12 @@ struct ContentView: View {
             
             // Camera View
             if showCamera {
-                Color.black
-                    .ignoresSafeArea(.all)
-                    .transition(.move(edge: .bottom))
-                CameraView(isShowing: $showCamera)
-                    .transition(.move(edge: .bottom))
+                CameraView(isShowing: $showCamera,
+                           viewHeight: $cameraViewHeight,
+                           showContents: $showCameraViewContents,
+                           contentsOpacity: $cameraViewContentsOpacity
+                )
+                    .frame(width: .infinity, height: cameraViewHeight)
             }
             
             // Optional overlay: can be a custom menu or blur background, etc.
@@ -125,5 +127,17 @@ struct ContentView: View {
             }
         }
         .animation(.easeInOut, value: showMoreSheet)
+    }
+    
+    private func openCameraView() {
+        showCamera = true
+        withAnimation {
+            cameraViewHeight = .infinity
+        } completion: {
+            showCameraViewContents = true
+            withAnimation {
+                cameraViewContentsOpacity = 1
+            }
+        }
     }
 }
