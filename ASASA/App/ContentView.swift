@@ -24,7 +24,7 @@ struct ContentView: View {
             
             if showMoreSheet {
                 // 뒤 배경을 어둡게 하는 반투명 레이어
-                Color.black.opacity(0.4)
+                Color.black.opacity(0.3)
                     .ignoresSafeArea()
                     .onTapGesture {
                         showMoreSheet = false
@@ -76,7 +76,7 @@ struct ContentView: View {
                     }
                     .frame(maxWidth: .infinity) // 너비를 최대로 설정
                     .transition(.move(edge: .bottom))
-                    .background(.white)
+                    .background(.background)
                 }
                 
                 // 회색 구분선
@@ -137,7 +137,7 @@ struct ContentView: View {
                 }
                 .frame(maxWidth: .infinity)
                 .padding()
-                .background(.white)
+                .background(.background)
             }
             
             // Camera View
