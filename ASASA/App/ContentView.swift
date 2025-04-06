@@ -20,7 +20,10 @@ struct ContentView: View {
                 PhotosView()
             case .profile:
                 ProfileView()
+            case .settings:
+                SettingView()
             }
+            
             
             if showMoreSheet {
                 // 뒤 배경을 어둡게 하는 반투명 레이어
@@ -57,13 +60,14 @@ struct ContentView: View {
                         
                         Divider()
                         Button(action: {
+                            viewModel.currentScreen = .settings
                             showMoreSheet = false
                         }) {
                             HStack {
-                                Image(systemName: "person.fill")
+                                Image(systemName: "gear")
                                     .foregroundColor(.blue)
                                     .frame(width: 30)
-                                Text("흠 머하지")
+                                Text("설정")
                                     .foregroundColor(.primary)
                                 Spacer()
                                 Image(systemName: "chevron.right")

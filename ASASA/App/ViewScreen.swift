@@ -15,4 +15,5 @@ enum ViewScreen {
     case feed
     case photos
     case profile
+    case settings
 }
