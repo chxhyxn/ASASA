@@ -3,11 +3,7 @@ import SwiftUI
 struct ContentView: View {
     @Environment(ContentViewModel.self) var viewModel
     
-    @State private var showCamera = false
     @State private var showMoreSheet = false
-    @State private var cameraViewHeight: CGFloat = 0
-    @State private var showCameraViewContents = false
-    @State private var cameraViewContentsOpacity: Double = 0
     
     var body: some View {
         ZStack {
@@ -112,7 +108,7 @@ struct ContentView: View {
                     Spacer()
                     
                     Button(action: {
-                        openCameraView()
+                        viewModel.openCamera()
                     }) {
                         Image(systemName: "camera.circle")
                             .font(.largeTitle)
@@ -145,27 +141,9 @@ struct ContentView: View {
             }
             
             // Camera View
-            if showCamera {
-                CameraView(isShowing: $showCamera,
-                           viewHeight: $cameraViewHeight,
-                           showContents: $showCameraViewContents,
-                           contentsOpacity: $cameraViewContentsOpacity
-                )
-                .frame(width: .infinity, height: cameraViewHeight)
-            }
+            CameraView()
+            .frame(maxWidth: .infinity, maxHeight: viewModel.cameraViewHeight)
         }
         .animation(.easeInOut, value: showMoreSheet)
-    }
-    
-    private func openCameraView() {
-        showCamera = true
-        withAnimation(.easeIn(duration: 0.8)) {
-            cameraViewHeight = .infinity
-        } completion: {
-            showCameraViewContents = true
-            withAnimation {
-                cameraViewContentsOpacity = 1
-            }
-        }
     }
 }

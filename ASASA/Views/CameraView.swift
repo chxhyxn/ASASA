@@ -8,21 +8,18 @@
 import SwiftUI
 
 struct CameraView: View {
-    @Binding var isShowing: Bool
-    @Binding var viewHeight: CGFloat
-    @Binding var showContents: Bool
-    @Binding var contentsOpacity: Double
+    @Environment(ContentViewModel.self) var viewModel
     
     var body: some View {
         ZStack {
             Color.black // Camera background
                 .ignoresSafeArea()
-            if showContents {
+            if viewModel.showCameraViewContents {
                 VStack {
                     HStack {
                         Spacer()
                         Button(action: {
-                            closeCameraView()
+                            viewModel.closeCamera()
                         }) {
                             Image(systemName: "xmark.circle.fill")
                                 .font(.title)
@@ -54,21 +51,7 @@ struct CameraView: View {
                     }
                     .padding(.bottom)
                 }
-                .opacity(contentsOpacity)
-            }
-        }
-    }
-    
-    private func closeCameraView() {
-        withAnimation {
-            contentsOpacity = 0
-        }
-        completion: {
-            showContents = false
-            withAnimation(.easeOut(duration: 0.8)) {
-                viewHeight = 0
-            } completion: {
-                isShowing = false
+                .opacity(viewModel.cameraViewContentsOpacity)
             }
         }
     }
