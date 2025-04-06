@@ -22,9 +22,45 @@ struct ContentView: View {
                 ProfileView()
             }
             
+            if showMoreSheet {
+                // 뒤 배경을 어둡게 하는 반투명 레이어
+                Color.black.opacity(0.4)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        showMoreSheet = false
+                    }
+                    .transition(.opacity) // 배경도 자연스럽게 페이드 인/아웃
+            }
+            
             // TabBar
-            VStack {
+            VStack(spacing: 0) {
                 Spacer()
+                if showMoreSheet {
+                    // 실제 시트(메뉴) 부분
+                    VStack(spacing: 20) {
+                        Text("More Options")
+                            .font(.title2)
+                            .padding()
+                        
+                        Button("Settings") {
+                            // Do something
+                            showMoreSheet = false
+                        }
+                        
+                        Button("Help") {
+                            // Do something
+                            showMoreSheet = false
+                        }
+                        
+                        Button("Close") {
+                            showMoreSheet = false
+                        }
+                    }
+                    .frame(maxWidth: .infinity) // 너비를 최대로 설정
+                    .background(.white)
+                    .transition(.move(edge: .bottom))
+                }
+                
                 // Bottom tab bar
                 HStack {
                     Spacer()
@@ -73,7 +109,7 @@ struct ContentView: View {
                     Button(action: {
                         showMoreSheet.toggle()
                     }) {
-                        Image(systemName: "ellipsis.circle")
+                        Image(systemName: showMoreSheet ? "ellipsis.circle.fill" : "ellipsis.circle")
                             .font(.largeTitle)
                     }
                     Spacer()
@@ -91,39 +127,6 @@ struct ContentView: View {
                            contentsOpacity: $cameraViewContentsOpacity
                 )
                     .frame(width: .infinity, height: cameraViewHeight)
-            }
-            
-            // Optional overlay: can be a custom menu or blur background, etc.
-            if showMoreSheet {
-                Color.black.opacity(0.4)
-                    .ignoresSafeArea()
-                    .onTapGesture {
-                        showMoreSheet = false
-                    }
-                
-                VStack(spacing: 20) {
-                    Text("More Options")
-                        .font(.title2)
-                        .padding()
-                    
-                    Button("Settings") {
-                        // Do something
-                        showMoreSheet = false
-                    }
-                    
-                    Button("Help") {
-                        // Do something
-                        showMoreSheet = false
-                    }
-                    
-                    Button("Close") {
-                        showMoreSheet = false
-                    }
-                }
-                .padding()
-                .background(RoundedRectangle(cornerRadius: 20).fill(Color.white))
-                .shadow(radius: 10)
-                .padding()
             }
         }
         .animation(.easeInOut, value: showMoreSheet)
