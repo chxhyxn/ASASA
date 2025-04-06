@@ -13,6 +13,6 @@ import SwiftUI
 enum ViewScreen {
     case learn
     case feed
-    case camera
+    case photos
     case profile
 }

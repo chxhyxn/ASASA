@@ -2,6 +2,7 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var viewModel = ContentViewModel(currentScreen: .learn)
+    @State private var showCamera = false
     @State private var showMoreSheet = false
     
     var body: some View {
@@ -11,11 +12,11 @@ struct ContentView: View {
             case .learn:
                 LearnView()
             case .feed:
-                LearnView()
-            case .camera:
-                LearnView()
+                FeedView()
+            case .photos:
+                PhotosView()
             case .profile:
-                LearnView()
+                ProfileView()
             }
             
             // TabBar
@@ -47,22 +48,22 @@ struct ContentView: View {
                     Spacer()
 
                     Button(action: {
-                        viewModel.currentScreen = .camera
+                        withAnimation(.spring()) {
+                            showCamera = true
+                        }
                     }) {
-                        Image(systemName: viewModel.currentScreen == .camera ?
-                              "camera.circle.fill" :
-                              "camera.circle")
+                        Image(systemName: "camera.circle")
                         .font(.largeTitle)
                     }
 
                     Spacer()
 
                     Button(action: {
-                        viewModel.currentScreen = .profile
+                        viewModel.currentScreen = .photos
                     }) {
-                        Image(systemName: viewModel.currentScreen == .profile ?
-                              "person.crop.circle.fill" :
-                              "person.crop.circle")
+                        Image(systemName: viewModel.currentScreen == .photos ?
+                              "photo.circle.fill" :
+                              "photo.circle")
                         .font(.largeTitle)
                     }
 
@@ -79,6 +80,15 @@ struct ContentView: View {
                 .frame(maxWidth: .infinity)
                 .padding()
                 .background(Color(.systemGray6))
+            }
+            
+            // Camera View
+            if showCamera {
+                Color.black
+                    .ignoresSafeArea(.all)
+                    .transition(.move(edge: .bottom))
+                CameraView(isShowing: $showCamera)
+                    .transition(.move(edge: .bottom))
             }
             
             // Optional overlay: can be a custom menu or blur background, etc.
