@@ -13,8 +13,4 @@ import Observation
 @Observable
 class ContentViewModel {
     var currentScreen: ViewScreen = .learn
-    
-    init(currentScreen: ViewScreen) {
-        self.currentScreen = .learn
-    }
 }

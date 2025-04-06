@@ -1,7 +1,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var viewModel = ContentViewModel(currentScreen: .learn)
+    @Environment(ContentViewModel.self) var viewModel
+    
     @State private var showCamera = false
     @State private var showMoreSheet = false
     @State private var cameraViewHeight: CGFloat = 0
